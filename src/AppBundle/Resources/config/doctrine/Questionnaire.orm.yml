@@ -1,0 +1,19 @@
+AppBundle\Entity\Questionnaire:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\QuestionnaireRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        titre:
+            type: string
+            length: 255
+        publie:
+            type: boolean
+        date:
+            type: date
+    lifecycleCallbacks: {  }

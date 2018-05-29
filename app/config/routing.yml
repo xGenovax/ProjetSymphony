@@ -1,0 +1,15 @@
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+accueil:
+    path: /accueil
+    defaults: { _controller: AppBundle:Default:accueil}
+thematiques:
+    path: /thematiques
+    defaults: { _controller: AppBundle:Default:consulterThematiques}
+questionnaires:
+    path: /questionnaires
+    defaults: { _controller: AppBundle:Default:consulterQuestionnaires}
+utilisateur:
+    path: /utilisateur
+    defaults: { _controller: AppBundle:Default:consulterUtilisateur}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </head>
+    <body>
+
+
+        <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+          <!-- Brand -->
+          <a class="navbar-brand" href="#">QUIZZLY</a>
+
+          <!-- Links -->
+          <ul class="navbar-nav">
+            <li class="nav-item {% if 'accueil' in app.request.attributes.get('_route') %} active{% endif %}" >
+              <a class="nav-link" href="{{ path('accueil')}}">Accueil</a>
+            </li>
+
+            <li class="nav-item {% if 'thematiques' in app.request.attributes.get('_route') %} active{% endif %}" >
+              <a class="nav-link" href="{{ path('thematiques')}}">Thématiques</a>
+
+            </li>
+            <li class="nav-item {% if 'questionnaires' in app.request.attributes.get('_route') %} active{% endif %}" >
+              <a class="nav-link" href="{{ path('questionnaires')}}">Questionnaires</a>
+            </li>
+          </ul>
+
+          <!-- Align Right -->
+          <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                    <a class="nav-link"href="{{ path('utilisateur')}}">Paul REGIS</a>
+                </li>
+            </ul>
+        </nav>
+
+        {% block body %}{% endblock %}
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

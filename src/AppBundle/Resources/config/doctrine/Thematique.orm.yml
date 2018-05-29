@@ -1,0 +1,15 @@
+AppBundle\Entity\Thematique:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ThematiqueRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        titre:
+            type: string
+            length: 255
+    lifecycleCallbacks: {  }
