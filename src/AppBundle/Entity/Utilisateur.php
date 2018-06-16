@@ -32,6 +32,78 @@ class Utilisateur
      */
     private $password;
 
+    /**
+     * @var Role
+     */
+    private $roles;
+
+    /**
+     * @var Thematique
+     */
+    private $thematiques;
+
+    // Constructeur
+    public function __construct()
+
+    {
+
+      $this->roles = new ArrayCollection();
+      $this->thematiques = new ArrayCollection();
+
+    }
+
+    /**
+    * Methodes Thematique
+    *
+    */
+    public function addThematique(Thematique $role)
+    {
+
+      $this->thematiques[] = $thematique;
+
+      return $this;
+
+    }
+
+    public function removeThematique(Thematique $thematique)
+    {
+
+      $this->thematiques->removeElement($thematique);
+
+    }
+
+    public function getThematiques()
+    {
+
+      return $this->thematiques;
+
+    }
+    /**
+    * Methodes Role
+    *
+    */
+    public function addRole(Role $role)
+    {
+
+      $this->roles[] = $role;
+
+      return $this;
+
+    }
+
+    public function removeRole(Role $role)
+    {
+
+      $this->roles->removeElement($role);
+
+    }
+
+    public function getRoles()
+    {
+
+      return $this->roles;
+
+    }
 
     /**
      * Get id
@@ -139,4 +211,3 @@ class Utilisateur
         return $this->password;
     }
 }
-

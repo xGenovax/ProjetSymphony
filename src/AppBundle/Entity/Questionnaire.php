@@ -2,6 +2,9 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * Questionnaire
  */
@@ -27,6 +30,50 @@ class Questionnaire
      */
     private $date;
 
+    /**
+     * @Assert\Count(
+     *      min = 1,
+     *      max = 10,
+     *      minMessage = "At least one question to be added",
+     *      maxMessage = "Not allowed"
+     * )
+     */
+    private $questions;
+
+    // Constructeur
+    public function __construct()
+    {
+
+      $this->questions = new ArrayCollection();
+
+    }
+
+    /**
+    * Methodes Question
+    *
+    */
+    public function addQuestion(Question $question)
+    {
+
+      $this->questions[] = $question;
+
+      return $this;
+
+    }
+
+    public function removeQuestion(Question $question)
+    {
+
+      $this->questions->removeElement($question);
+
+    }
+
+    public function getQuestions()
+    {
+
+      return $this->questions;
+
+    }
 
     /**
      * Get id
@@ -109,5 +156,8 @@ class Questionnaire
     {
         return $this->date;
     }
-}
 
+    public function __toString() {
+        return $this->titre;
+    }
+}

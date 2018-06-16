@@ -3,9 +3,9 @@
 namespace AppBundle\Entity;
 
 /**
- * Question
+ * Role
  */
-class Question
+class Role
 {
     /**
      * @var int
@@ -15,7 +15,7 @@ class Question
     /**
      * @var string
      */
-    private $question;
+    private $libelle;
 
 
     /**
@@ -29,30 +29,27 @@ class Question
     }
 
     /**
-     * Set question
+     * Set libelle
      *
-     * @param string $question
+     * @param string $libelle
      *
-     * @return Question
+     * @return Role
      */
-    public function setQuestion($question)
+    public function setLibelle($libelle)
     {
-        $this->question = $question;
+        $this->libelle = $libelle;
 
         return $this;
     }
 
     /**
-     * Get question
+     * Get libelle
      *
      * @return string
      */
-    public function getQuestion()
+    public function getLibelle()
     {
-        return $this->question;
-    }
-
-    public function __toString() {
-        return $this->question;
+        return $this->libelle;
     }
 }
+

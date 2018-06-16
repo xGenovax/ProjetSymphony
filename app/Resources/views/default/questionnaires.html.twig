@@ -2,4 +2,10 @@
 
 {% block body %}
 <h1>Mes questionnaires :</h1>
+<a class="nav-link" href="{{ path('questionnaire_ajouter',{ 'id': 0 })}}">Nouveau questionnaire</a>
+<ul>
+{% for item in products %}
+    <li>{{ item.id }} - {{ item.titre }} - {{ item.date|date("d/m/Y") }} <a href="{{ path('questionnaire_ajouter',{ 'id': item.id }) }}">Voir</a></li>
+{% endfor %}
+</ul>
 {% endblock %}

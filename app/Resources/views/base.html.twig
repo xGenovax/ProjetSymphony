@@ -27,8 +27,17 @@
               <a class="nav-link" href="{{ path('thematiques')}}">Thématiques</a>
 
             </li>
-            <li class="nav-item {% if 'questionnaires' in app.request.attributes.get('_route') %} active{% endif %}" >
-              <a class="nav-link" href="{{ path('questionnaires')}}">Questionnaires</a>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle {% if 'questionnaires' in app.request.attributes.get('_route') %} active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Mes Questionnaires
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="{{ path('questionnaires')}}">Voir</a>
+                <a class="dropdown-item" href="{{ path('questionnaire_ajouter',{ 'id': 0 })}}">Nouveau</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
             </li>
           </ul>
 

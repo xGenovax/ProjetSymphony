@@ -22,3 +22,24 @@ AppBundle\Entity\Utilisateur:
             type: string
             length: 255
     lifecycleCallbacks: {  }
+    manyToMany:
+      roles:
+        targetEntity: Role
+        joinTable:
+          name: utilisateurs_roles
+          joinColumns:
+            utilisateur_id:
+              referencedColumnName: id
+          inverseJoinColumns:
+            role_id:
+              referencedColumnName: id
+      thematiques:
+        targetEntity: Thematique
+        joinTable:
+          name: utilisateurs_thematiques
+          joinColumns:
+            utilisateur_id:
+              referencedColumnName: id
+          inverseJoinColumns:
+            thematique_id:
+              referencedColumnName: id

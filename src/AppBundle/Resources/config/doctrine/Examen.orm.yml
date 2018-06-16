@@ -1,0 +1,19 @@
+AppBundle\Entity\Examen:
+    type: entity
+    table: null
+    repositoryClass: AppBundle\Repository\ExamenRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        date:
+            type: date
+        note:
+            type: float
+            nullable: true
+        rendu:
+            type: boolean
+    lifecycleCallbacks: {  }

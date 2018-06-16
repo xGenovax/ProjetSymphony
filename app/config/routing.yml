@@ -10,6 +10,11 @@ thematiques:
 questionnaires:
     path: /questionnaires
     defaults: { _controller: AppBundle:Default:consulterQuestionnaires}
+questionnaire_ajouter:
+    path:  /ajouterQuestionnaire/{id}
+    defaults: { _controller: AppBundle:Default:ajouterQuestionnaire}
+    requirements:
+        id:  \d+
 utilisateur:
     path: /utilisateur
     defaults: { _controller: AppBundle:Default:consulterUtilisateur}

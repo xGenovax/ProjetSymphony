@@ -17,3 +17,16 @@ AppBundle\Entity\Questionnaire:
         date:
             type: date
     lifecycleCallbacks: {  }
+    manyToMany:
+      questions:
+        targetEntity: Question
+        cascade: ["persist"]
+        joinTable:
+          name: questionnaire_questions
+          joinColumns:
+            questionnaire_id:
+              referencedColumnName: id
+          inverseJoinColumns:
+            question_id:
+              referencedColumnName: id
+              unique: true

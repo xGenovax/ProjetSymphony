@@ -9,3 +9,14 @@ AppBundle\Entity\Reponse:
             generator:
                 strategy: AUTO
     lifecycleCallbacks: {  }
+    manyToOne:
+      question:
+        targetEntity: Question
+        joinColumn:
+          name: question_id
+          referencedColumnName: id
+      examen:
+        targetEntity: Examen
+        joinColumn:
+          name: examen_id
+          referencedColumnName: id
