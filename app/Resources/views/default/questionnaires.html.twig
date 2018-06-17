@@ -3,9 +3,42 @@
 {% block body %}
 <h1>Mes questionnaires :</h1>
 <a class="nav-link" href="{{ path('questionnaire_ajouter',{ 'id': 0 })}}">Nouveau questionnaire</a>
-<ul>
-{% for item in products %}
-    <li>{{ item.id }} - {{ item.titre }} - {{ item.date|date("d/m/Y") }} <a href="{{ path('questionnaire_ajouter',{ 'id': item.id }) }}">Voir</a></li>
-{% endfor %}
-</ul>
+<!-- Recherche:<br/>
+Titre: <input type="text" name="rechercheTitre"></input><br/>
+Theme: <input type="select" -->
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Titre</th>
+            <th>Publié</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for questionnaire in products %}
+        <tr>
+            <td><a href="{{ path('questionnaire_voir', { 'id': questionnaire.id }) }}">{{ questionnaire.id }}</a></td>
+            <td>{{ questionnaire.titre }}</td>
+            <td>{% if questionnaire.publie %}Oui{% else %}Non{% endif %}</td>
+            <td>{% if questionnaire.date %}{{ questionnaire.date|date('Y-m-d') }}{% endif %}</td>
+            <td>
+                <ul>
+                    <li>
+                        <a href="{{ path('questionnaire_voir', { 'id': questionnaire.id }) }}">show</a>
+                    </li>
+                    {% if questionnaire.publie == false %}
+                      <li>
+                        <a href="{{ path('questionnaire_ajouter',{ 'id': questionnaire.id }) }}">Modifier</a>
+                      </li>
+                    {% endif %}
+                </ul>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
+
 {% endblock %}

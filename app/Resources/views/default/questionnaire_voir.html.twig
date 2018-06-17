@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Questionnaire</h1>
+    <ul>
+        <li>
+            <a href="{{ path('questionnaires') }}">Retour à la liste</a>
+        </li>
+        <li>
+            <a href="{{ path('questionnaire_ajouter', { 'id': questionnaire.id }) }}">Modifier</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+
+    <table class="table">
+      <thead>
+        <tr>
+          <td>Id</td>
+          <td>Titre</td>
+          <td>Publie</td>
+          <td>Date</td>
+        </tr>
+      </thead>
+        <tbody>
+            <tr>
+                <td>{{ questionnaire.id }}</td>
+                <td>{{ questionnaire.titre }}</td>
+                <td>{% if questionnaire.publie %}Oui{% else %}Non{% endif %}</td>
+                <td>{% if questionnaire.date %}{{ questionnaire.date|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <td>Questions</td>
+      </tr>
+    </thead>
+    <tbody>
+      {% for question in questionnaire.questions %}
+          <tr>
+              <td>{{ question.question }}</td>
+          </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
