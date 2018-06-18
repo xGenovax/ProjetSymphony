@@ -51,5 +51,8 @@ class Thematique
     {
         return $this->titre;
     }
-}
 
+    public function __toString() {
+        return $this->titre;
+    }
+}

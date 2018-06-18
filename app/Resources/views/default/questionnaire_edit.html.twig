@@ -2,11 +2,15 @@
 
 {% block body %}
 <h1>Nouveau questionnaire :</h1>
+
+    <a href="{{ path('questionnaire_list') }}">Retour à la liste</a>
+
 {{ form_start(monFormulaire) }}
     {{ form_errors(monFormulaire) }}
 <table>
   <tr>
     <td>{{ form_row(monFormulaire.titre) }}</td>
+    <td>{{ form_row(monFormulaire.thematique) }}</td>
     <td>{{ form_row(monFormulaire.publie) }}</td>
   </tr><tr>
   </tr><tr>

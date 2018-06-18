@@ -31,6 +31,11 @@ class Questionnaire
     private $date;
 
     /**
+     * @var Thematique
+     */
+    private $thematique;
+
+    /**
      * @Assert\Count(
      *      min = 1,
      *      max = 10,
@@ -155,6 +160,30 @@ class Questionnaire
     public function getDate()
     {
         return $this->date;
+    }
+
+    /**
+     * Set thematique
+     *
+     * @param Thematique $thematique
+     *
+     * @return Questionnaire
+     */
+    public function setThematique($thematique)
+    {
+        $this->$thematique = $thematique;
+
+        return $this;
+    }
+
+    /**
+     * Get thematique
+     *
+     * @return Thematique
+     */
+    public function getThematique()
+    {
+        return $this->thematique;
     }
 
     public function __toString() {

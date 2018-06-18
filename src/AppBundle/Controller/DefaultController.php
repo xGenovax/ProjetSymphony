@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use AppBundle\Entity\Questionnaire;
+use AppBundle\Entity\Thematique;
 use AppBundle\Form\Type\QuestionnaireType;
 
 class DefaultController extends Controller
@@ -84,7 +85,7 @@ class DefaultController extends Controller
                     $entityManager = $this->getDoctrine()->getManager();
                     $entityManager->persist($questionnaire);
                     $entityManager->flush();
-                    $url = $this->generateUrl('questionnaires',
+                    $url = $this->generateUrl('questionnaire_list',
                                                array());
                     return $this->redirect($url);
             }
@@ -113,6 +114,40 @@ class DefaultController extends Controller
                                  array('monFormulaire' => $form->createView()));
     }
     */
+    /**
+     * @Route("/", name="listQuestionnaire")
+     */
+    public function listQuestionnaireAction(Request $request)
+    {
+      $themes = $this->getDoctrine()
+    ->getRepository(Thematique::class)
+    ->findAll();
+
+        $em = $this->getDoctrine()->getManager();
+
+        $queryBuilder = $em->getRepository('AppBundle:Questionnaire')->createQueryBuilder('bp');
+        if ($request->query->getAlnum('filter')) {
+            $queryBuilder->andWhere('bp.titre LIKE :titre')
+                ->setParameter('titre', '%' . $request->query->getAlnum('filter') . '%');
+        }
+        if ($request->query->getAlnum('filterTheme')) {
+            $queryBuilder->addSelect('r')->join('bp.thematique', 'r')->andWhere('r.id = :idt')
+                ->setParameter('idt', $request->query->getAlnum('filterTheme'));
+        }
+        $query = $queryBuilder->getQuery();
+        //echo var_dump($query);
+        $paginator  = $this->get('knp_paginator');
+
+        $blogPosts = $paginator->paginate(
+            $query, /* query NOT result */
+            $request->query->getInt('page', 1)/*page number*/,
+            $request->query->getInt('limit', 10)/*limit per page*/
+        );
+        //echo var_dump($blogPosts);
+        return $this->render('default/questionnaire_list.html.twig', [
+            'blog_posts' => $blogPosts,'themes' => $themes,
+        ]);
+    }
     public function consulterUtilisateurAction(){
       // replace this example code with whatever you need
       return $this->render('default/utilisateur.html.twig', [
@@ -131,13 +166,13 @@ class DefaultController extends Controller
         $form = $this->createDeleteForm($questionnaire);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        //if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($questionnaire);
             $em->flush();
-        }
+        //}
 
-        return $this->redirectToRoute('questionnaires');
+        return $this->redirectToRoute('questionnaire_list');
     }
     /**
      * Creates a form to delete a questionnaire entity.
@@ -154,4 +189,9 @@ class DefaultController extends Controller
             ->getForm()
         ;
     }
+
+    // public function buildSelectForm(FormBuilderInterface $builder, array $options)
+    // {
+    //     $builder->add('Thematique', 'entity', array('class' => 'SitePointBundle:Point', 'property' => 'CodeSd', 'empty_value' => '', 'required' => false,'group_by'=>'CodeSd'));
+    // }
 }

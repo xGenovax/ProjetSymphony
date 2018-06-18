@@ -29,3 +29,10 @@ php bin/console doctrine:schema:update --dump-sql
 apres
 
 php bin/console doctrine:schema:update --force
+
+
+
+Datatable:
+Si erreur "Fatal error: Allowed memory size of XXXXXXX bytes exhausted"
+Modifier le php.ini (C:\wamp64\bin\php\php5.6.35)
+memory_limit = -1

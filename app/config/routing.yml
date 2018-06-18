@@ -22,9 +22,13 @@ questionnaire_ajouter:
         id:  \d+
 questionnaire_supprimer:
     path:  /supprimerQuestionnaire/{id}
-    defaults: { _controller: AppBundle:Default:supprimerQuestionnaire}
+    defaults: { _controller: AppBundle:Default:delete}
     requirements:
         id:  \d+
+questionnaire_list:
+      path:  /listQuestionnaire/
+      defaults: { _controller: AppBundle:Default:listQuestionnaire}
+
 utilisateur:
     path: /utilisateur
     defaults: { _controller: AppBundle:Default:consulterUtilisateur}

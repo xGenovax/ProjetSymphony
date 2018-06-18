@@ -17,6 +17,12 @@ AppBundle\Entity\Questionnaire:
         date:
             type: date
     lifecycleCallbacks: {  }
+    manyToOne:
+      thematique:
+        targetEntity: Thematique
+        joinColumn:
+          name: thematique_id
+          referencedColumnName: id
     manyToMany:
       questions:
         targetEntity: Question

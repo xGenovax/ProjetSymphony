@@ -11,6 +11,7 @@ class QuestionnaireType extends AbstractType {
     public function buildForm(FormBuilderInterface $builder, array $options) {
 	  $builder->add('titre')
                 ->add('publie')
+                ->add('thematique')
                 ->add('questions', CollectionType::class, array(
                     'entry_type'   => QuestionType::class,
                     'allow_add'    => true,
