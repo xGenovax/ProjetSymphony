@@ -19,27 +19,24 @@ logout:
 thematiques:
     path: /thematiques
     defaults: { _controller: AppBundle:Default:consulterThematiques}
-questionnaires:
-    path: /questionnaires
-    defaults: { _controller: AppBundle:Default:consulterQuestionnaires}
 questionnaire_voir:
-    path:  /voirQuestionnaire/{id}
-    defaults: { _controller: AppBundle:Default:voirQuestionnaire}
+    path:  /questionnaire/voir/{id}
+    defaults: { _controller: AppBundle:Questionnaire:voirQuestionnaire}
     requirements:
         id:  \d+
 questionnaire_ajouter:
-    path:  /ajouterQuestionnaire/{id}
-    defaults: { _controller: AppBundle:Default:ajouterQuestionnaire}
+    path:  /questionnaire/ajouter/{id}
+    defaults: { _controller: AppBundle:Questionnaire:ajouterQuestionnaire}
     requirements:
         id:  \d+
 questionnaire_supprimer:
-    path:  /supprimerQuestionnaire/{id}
-    defaults: { _controller: AppBundle:Default:delete}
+    path:  /questionnaire/supprimer/{id}
+    defaults: { _controller: AppBundle:Questionnaire:delete}
     requirements:
         id:  \d+
 questionnaire_list:
-      path:  /listQuestionnaire/
-      defaults: { _controller: AppBundle:Default:listQuestionnaire}
+      path:  /questionnaire/
+      defaults: { _controller: AppBundle:Questionnaire:listQuestionnaire}
 
 utilisateur:
     path: /utilisateur

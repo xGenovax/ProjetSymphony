@@ -67,9 +67,9 @@ class Utilisateur implements UserInterface, EquatableInterface, \Serializable
     private $examens_correcteur;
 
     /**
-     * @var Examen
+     * @var Questionnaire
      */
-    private $examens_entraineur;
+    private $questionnaires_entraineur;
 
     // Constructeur
     public function __construct()
@@ -79,33 +79,33 @@ class Utilisateur implements UserInterface, EquatableInterface, \Serializable
       $this->thematiques = new ArrayCollection();
       $this->$examens_apprenant = new ArrayCollection();
       $this->$examens_correcteur = new ArrayCollection();
-      $this->$examens_entraineur = new ArrayCollection();
+      $this->$questionnaires_entraineur = new ArrayCollection();
     }
 
     /**
-    * Methodes Examen Entraineur
+    * Methodes Questionnaire Entraineur
     *
     */
-    public function addExamenEntraineur(Examen $examen)
+    public function addQuestionnaireEntraineur(Questionnaire $questionnaire)
     {
 
-      $this->examens_entraineur[] = $examen;
+      $this->questionnaires_entraineur[] = $questionnaire;
 
       return $this;
 
     }
 
-    public function removeExamenEntraineur(Examen $examen)
+    public function removeQuestionnaireEntraineur(Questionnaire $questionnaire)
     {
 
-      $this->examens_entraineur->removeElement($examen);
+      $this->questionnaires_entraineur->removeElement($questionnaire);
 
     }
 
-    public function getExamensEntraineur()
+    public function getQuestionnairesEntraineur()
     {
 
-      return $this->examens_entraineur;
+      return $this->questionnaires_entraineur;
 
     }
 

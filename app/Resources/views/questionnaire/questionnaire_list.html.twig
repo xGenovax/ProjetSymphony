@@ -37,8 +37,8 @@
                     <a href="{{ path('questionnaire_voir', { 'id': post.id }) }}" class="btn btn-primary btn-sm btn-block">Voir</a>
                     {% if post.publie == false %}
                       <a href="{{ path('questionnaire_ajouter',{ 'id': post.id }) }}" class="btn btn-primary btn-sm btn-block">Editer</a>
+                      <a href="{{ path('questionnaire_supprimer',{ 'id': post.id }) }}" class="btn btn-danger btn-sm btn-block">Supprimer</a>
                     {% endif %}
-                    <a href="{{ path('questionnaire_supprimer',{ 'id': post.id }) }}" class="btn btn-danger btn-sm btn-block">Supprimer</a>
                 </td>
             </tr>
             {% endfor %}

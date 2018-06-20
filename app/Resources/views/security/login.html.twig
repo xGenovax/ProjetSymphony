@@ -4,18 +4,24 @@
     <title>Quizzly</title>
   </head>
   <body>
+        <div class="container">
     <h1>Connexion</h1>
-    {% if error %}
-      <div>{{error.message}}</div>
-    {% endif %}
     <form action="{{ path('login_check')}}" method="POST">
-      <label for="username">Email :</label>
-      <input type="text" id="username" name="_email" value="{{last_email}}"/>
-
-      <label for="password">Email :</label>
-      <input type="password" id="password" name="_password"/>
-
-      <button type="submit">Se connecter</button>
+      <div class="input-group">
+      <label for="username"><b>Identifiant :</b></label>
+      <span class="input-group-addon"><i class="fa fa-user"></i></span><input class="form-control" type="text" id="username" name="_email" value="{{last_email}}" placeholder="Identifiant" required/>
+    </div><div class="input-group">
+      <label for="password"><b>Email :</b></label>
+      <span class="input-group-addon"><i class="fa fa-user"></i></span><input class="form-control" type="password" id="password" name="_password" placeholder="Mot de passe" required/>
+</div><div class="input-group">
+      <button class="btn btn-success btn-block login-btn" type="submit">Se connecteree</button>
+      </div>
+      {% if error %}
+        <div>{{error.message}}</div>
+      {% endif %}
     </form>
+
+
+  </div>
   </body>
 </html>

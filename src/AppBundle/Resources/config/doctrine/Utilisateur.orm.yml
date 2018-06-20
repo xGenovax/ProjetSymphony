@@ -51,9 +51,8 @@ AppBundle\Entity\Utilisateur:
         cascade: ["remove"]
         targetEntity: Examen
         mappedBy: apprenant
-      examens_entraineur:
-        cascade: ["remove"]
-        targetEntity: Examen
+      questionnaires_entraineur:
+        targetEntity: Questionnaire
         mappedBy: entraineur
       examens_correcteur:
         targetEntity: Examen

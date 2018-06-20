@@ -35,9 +35,3 @@ AppBundle\Entity\Examen:
         joinColumn:
           name: utilisateur_id
           referencedColumnName: id
-      entraineur:
-        targetEntity: Utilisateur
-        inversedBy: examens_entraineur
-        joinColumn:
-          name: utilisateur_id
-          referencedColumnName: id

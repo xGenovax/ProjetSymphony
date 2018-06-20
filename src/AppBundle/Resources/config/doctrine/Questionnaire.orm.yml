@@ -23,6 +23,12 @@ AppBundle\Entity\Questionnaire:
         joinColumn:
           name: thematique_id
           referencedColumnName: id
+      entraineur:
+        targetEntity: Utilisateur
+        inversedBy: questionnaires_entraineur
+        joinColumn:
+          name: utilisateur_id
+          referencedColumnName: id
     manyToMany:
       questions:
         targetEntity: Question

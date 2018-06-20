@@ -42,11 +42,6 @@ class Examen
      */
     private $correcteur;
 
-    /**
-     * @var Utilisateur
-     */
-    private $entraineur;
-
     // Constructeur
     public function __construct()
     {
@@ -136,30 +131,6 @@ class Examen
     public function getCorrecteur()
     {
         return $this->correcteur;
-    }
-
-    /**
-     * Set entraineur
-     *
-     * @param Utilisateur $entraineur
-     *
-     * @return Examen
-     */
-    public function setEntraineur($entraineur)
-    {
-        $this->entraineur = $entraineur;
-
-        return $this;
-    }
-
-    /**
-     * Get entraineur
-     *
-     * @return Utilisateur
-     */
-    public function getEntraineur()
-    {
-        return $this->entraineur;
     }
 
     /**

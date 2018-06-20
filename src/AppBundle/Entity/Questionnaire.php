@@ -34,7 +34,11 @@ class Questionnaire
      * @var Thematique
      */
     private $thematique;
-
+    
+    /**
+     * @var Utilisateur
+     */
+    private $entraineur;
     /**
      * @Assert\Count(
      *      min = 1,
@@ -51,6 +55,30 @@ class Questionnaire
 
       $this->questions = new ArrayCollection();
 
+    }
+
+    /**
+     * Set entraineur
+     *
+     * @param Utilisateur $entraineur
+     *
+     * @return Examen
+     */
+    public function setEntraineur($entraineur)
+    {
+        $this->entraineur = $entraineur;
+
+        return $this;
+    }
+
+    /**
+     * Get entraineur
+     *
+     * @return Utilisateur
+     */
+    public function getEntraineur()
+    {
+        return $this->entraineur;
     }
 
     /**

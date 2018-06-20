@@ -9,11 +9,6 @@
         <li>
             <a href="{{ path('questionnaire_ajouter', { 'id': questionnaire.id }) }}">Modifier</a>
         </li>
-        <li>
-            {{ form_start(delete_form) }}
-                <input type="submit" value="Delete">
-            {{ form_end(delete_form) }}
-        </li>
     </ul>
 
     <table class="table">
