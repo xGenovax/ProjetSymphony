@@ -26,7 +26,7 @@ $(document).ready(function() {
   // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
   var $container = $('div#questionnaire_questions');
   // On ajoute un lien pour ajouter une nouvelle catégorie
-  var $addLink = $('<a href="#" id="add_question" class="btn btn-default">Ajouter une question</a>');
+  var $addLink = $('<a href="#" id="add_question" class="btn btn-primary">Ajouter une question</a>');
   $container.append($addLink);
   // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
   $addLink.click(function(e) {

@@ -30,7 +30,6 @@ class DefaultController extends Controller
       // replace this example code with whatever you need
       return $this->render('default/index.html.twig', [
           'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
-          $user
       ]);
     }
 
@@ -79,7 +78,7 @@ class DefaultController extends Controller
                                               array('id' => $questionnaire->getId())) ));
             }
 
-            $form->add('submit', SubmitType::class, array('label' => 'Modifier'));
+            $form->add('submit', SubmitType::class, array('label' => 'Enregistrer'));
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                     $questionnaire->setDate(new \DateTime());

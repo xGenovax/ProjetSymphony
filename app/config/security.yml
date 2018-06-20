@@ -19,7 +19,7 @@ security:
             security: false
 
         main:
-            pattern: ^/(listQuestionnaire|ajouterQuestionnaire|voirQuestionnaire|login_check|logout)
+            pattern: ^/(listQuestionnaire|ajouterQuestionnaire|voirQuestionnaire|login_check|logout|accueil|thematiques|utilisateur)
             form_login:
                 login_path: /login
                 check_path: /login_check
@@ -27,9 +27,10 @@ security:
             logout:
                 path: /logout
                 target: /
-        accueil:
-            pattern: ^/
-            anonymous: ~
+            anonymous: true
+        # accueil:
+        #     pattern: ^/
+        #     anonymous: ~
             # activate different ways to authenticate
 
             # https://symfony.com/doc/current/security.html#a-configuring-how-your-users-will-authenticate
@@ -37,3 +38,11 @@ security:
 
             # https://symfony.com/doc/current/security/form_login_setup.html
             #form_login: ~
+    access_control:
+        - { path: ^/login$, role: IS_AUTHENTICATED_FULLY  }
+        - { path: ^/listQuestionnaire, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/voirQuestionnaire, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/ajouterQuestionnaire, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/thematiques, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/utilisateur, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/accueil, role: IS_AUTHENTICATED_ANONYMOUSLY }
