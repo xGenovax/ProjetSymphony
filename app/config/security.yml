@@ -4,9 +4,14 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
+        mes_utilisateurs:
+            entity:
+                class: AppBundle:Utilisateur
+                property: username
 
+        #     memory: ~
+    encoders:
+        AppBundle\Entity\Utilisateur: plaintext
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
@@ -14,6 +19,16 @@ security:
             security: false
 
         main:
+            pattern: ^/(listQuestionnaire|ajouterQuestionnaire|voirQuestionnaire|login_check|logout)
+            form_login:
+                login_path: /login
+                check_path: /login_check
+                default_target_path: questionnaire_list
+            logout:
+                path: /logout
+                target: /
+        accueil:
+            pattern: ^/
             anonymous: ~
             # activate different ways to authenticate
 

@@ -2,10 +2,14 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\EquatableInterface;
+
 /**
  * Utilisateur
  */
-class Utilisateur
+class Utilisateur implements UserInterface, EquatableInterface, \Serializable
 {
     /**
      * @var int
@@ -33,6 +37,16 @@ class Utilisateur
     private $password;
 
     /**
+     * @var string
+     */
+    private $salt;
+
+    /**
+     * @var string
+     */
+    private $username;
+
+    /**
      * @var Role
      */
     private $roles;
@@ -42,13 +56,110 @@ class Utilisateur
      */
     private $thematiques;
 
+    /**
+     * @var Examen
+     */
+    private $examens_apprenant;
+
+    /**
+     * @var Examen
+     */
+    private $examens_correcteur;
+
+    /**
+     * @var Examen
+     */
+    private $examens_entraineur;
+
     // Constructeur
     public function __construct()
 
     {
-
       $this->roles = new ArrayCollection();
       $this->thematiques = new ArrayCollection();
+      $this->$examens_apprenant = new ArrayCollection();
+      $this->$examens_correcteur = new ArrayCollection();
+      $this->$examens_entraineur = new ArrayCollection();
+    }
+
+    /**
+    * Methodes Examen Entraineur
+    *
+    */
+    public function addExamenEntraineur(Examen $examen)
+    {
+
+      $this->examens_entraineur[] = $examen;
+
+      return $this;
+
+    }
+
+    public function removeExamenEntraineur(Examen $examen)
+    {
+
+      $this->examens_entraineur->removeElement($examen);
+
+    }
+
+    public function getExamensEntraineur()
+    {
+
+      return $this->examens_entraineur;
+
+    }
+
+    /**
+    * Methodes Examen Correcteur
+    *
+    */
+    public function addExamenCorrecteur(Examen $examen)
+    {
+
+      $this->examens_correcteur[] = $examen;
+
+      return $this;
+
+    }
+
+    public function removeExamenCorrecteur(Examen $examen)
+    {
+
+      $this->examens_correcteur->removeElement($examen);
+
+    }
+
+    public function getExamensCorrecteur()
+    {
+
+      return $this->examens_correcteur;
+
+    }
+
+    /**
+    * Methodes Examen Apprenant
+    *
+    */
+    public function addExamenApprenant(Examen $examen)
+    {
+
+      $this->examens_apprenant[] = $examen;
+
+      return $this;
+
+    }
+
+    public function removeExamenApprenant(Examen $examen)
+    {
+
+      $this->examens_apprenant->removeElement($examen);
+
+    }
+
+    public function getExamensApprenant()
+    {
+
+      return $this->examens_apprenant;
 
     }
 
@@ -56,7 +167,7 @@ class Utilisateur
     * Methodes Thematique
     *
     */
-    public function addThematique(Thematique $role)
+    public function addThematique(Thematique $thematique)
     {
 
       $this->thematiques[] = $thematique;
@@ -101,7 +212,7 @@ class Utilisateur
     public function getRoles()
     {
 
-      return $this->roles;
+      return $this->roles->toArray();
 
     }
 
@@ -202,6 +313,16 @@ class Utilisateur
     }
 
     /**
+     * Get username
+     *
+     * @return string
+     */
+    public function getUsername()
+    {
+        return $this->username;
+    }
+
+    /**
      * Get password
      *
      * @return string
@@ -209,5 +330,60 @@ class Utilisateur
     public function getPassword()
     {
         return $this->password;
+    }
+
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    /**
+    * FONCTIONS DE SERIALIZATION/DESERIALIZATION
+    */
+    public function serialize(){
+      return serialize(array(
+        $this->id,
+        $this->email,
+        $this->prenom,
+        $this->nom,
+        $this->password
+      ));
+    }
+
+    public function unserialize($serialized){
+      list(
+        $this->id,
+        $this->email,
+        $this->prenom,
+        $this->nom,
+        $this->password
+        ) = unserialize($serialized);
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
+    public function isEqualTo(UserInterface $user)
+    {
+        if (!$user instanceof Utilisateur) {
+            return false;
+        }
+
+        if ($this->password !== $user->getPassword()) {
+            return false;
+        }
+
+        if ($this->salt !== $user->getSalt()) {
+            return false;
+        }
+
+        if ($this->email !== $user->getUsername()) {
+            return false;
+        }
+
+        return true;
     }
 }

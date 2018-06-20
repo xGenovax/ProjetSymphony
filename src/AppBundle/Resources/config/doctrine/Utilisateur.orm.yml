@@ -21,6 +21,9 @@ AppBundle\Entity\Utilisateur:
         password:
             type: string
             length: 255
+        username:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }
     manyToMany:
       roles:
@@ -43,3 +46,15 @@ AppBundle\Entity\Utilisateur:
           inverseJoinColumns:
             thematique_id:
               referencedColumnName: id
+    oneToMany:
+      examens_apprenant:
+        cascade: ["remove"]
+        targetEntity: Examen
+        mappedBy: apprenant
+      examens_entraineur:
+        cascade: ["remove"]
+        targetEntity: Examen
+        mappedBy: entraineur
+      examens_correcteur:
+        targetEntity: Examen
+        mappedBy: correcteur

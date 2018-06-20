@@ -17,3 +17,27 @@ AppBundle\Entity\Examen:
         rendu:
             type: boolean
     lifecycleCallbacks: {  }
+    oneToMany:
+      reponses:
+        cascade: ["remove"]
+        targetEntity: Reponse
+        mappedBy: examen
+    manyToOne:
+      apprenant:
+        targetEntity: Utilisateur
+        inversedBy: examens_apprenant
+        joinColumn:
+          name: utilisateur_id
+          referencedColumnName: id
+      correcteur:
+        targetEntity: Utilisateur
+        inversedBy: examens_correcteur
+        joinColumn:
+          name: utilisateur_id
+          referencedColumnName: id
+      entraineur:
+        targetEntity: Utilisateur
+        inversedBy: examens_entraineur
+        joinColumn:
+          name: utilisateur_id
+          referencedColumnName: id

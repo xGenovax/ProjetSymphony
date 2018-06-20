@@ -27,6 +27,58 @@ class Examen
      */
     private $rendu;
 
+    /**
+     * @var Reponse
+     */
+    private $reponses;
+
+    /**
+     * @var Utilisateur
+     */
+    private $apprenant;
+
+    /**
+     * @var Utilisateur
+     */
+    private $correcteur;
+
+    /**
+     * @var Utilisateur
+     */
+    private $entraineur;
+
+    // Constructeur
+    public function __construct()
+    {
+      $this->reponses = new ArrayCollection();
+    }
+
+    /**
+    * Methodes Reponse
+    *
+    */
+    public function addReponse(Reponse $reponse)
+    {
+
+      $this->reponses[] = $reponse;
+
+      return $this;
+
+    }
+
+    public function removeReponse(Reponse $reponse)
+    {
+
+      $this->reponses->removeElement($reponse);
+
+    }
+
+    public function getReponses()
+    {
+
+      return $this->reponses;
+
+    }
 
     /**
      * Get id
@@ -36,6 +88,78 @@ class Examen
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Set apprenant
+     *
+     * @param Utilisateur $apprenant
+     *
+     * @return Examen
+     */
+    public function setApprenant($apprenant)
+    {
+        $this->apprenant = $apprenant;
+
+        return $this;
+    }
+
+    /**
+     * Get apprenant
+     *
+     * @return Utilisateur
+     */
+    public function getApprenant()
+    {
+        return $this->apprenant;
+    }
+
+    /**
+     * Set correcteur
+     *
+     * @param Utilisateur $apprenant
+     *
+     * @return Examen
+     */
+    public function setCorrecteur($correcteur)
+    {
+        $this->correcteur = $correcteur;
+
+        return $this;
+    }
+
+    /**
+     * Get correcteur
+     *
+     * @return Utilisateur
+     */
+    public function getCorrecteur()
+    {
+        return $this->correcteur;
+    }
+
+    /**
+     * Set entraineur
+     *
+     * @param Utilisateur $entraineur
+     *
+     * @return Examen
+     */
+    public function setEntraineur($entraineur)
+    {
+        $this->entraineur = $entraineur;
+
+        return $this;
+    }
+
+    /**
+     * Get entraineur
+     *
+     * @return Utilisateur
+     */
+    public function getEntraineur()
+    {
+        return $this->entraineur;
     }
 
     /**
@@ -110,4 +234,3 @@ class Examen
         return $this->rendu;
     }
 }
-

@@ -17,6 +17,7 @@ AppBundle\Entity\Reponse:
           referencedColumnName: id
       examen:
         targetEntity: Examen
+        inversedBy: reponses
         joinColumn:
           name: examen_id
           referencedColumnName: id

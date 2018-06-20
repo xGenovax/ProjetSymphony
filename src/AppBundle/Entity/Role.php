@@ -2,10 +2,12 @@
 
 namespace AppBundle\Entity;
 
+use Symfony\Component\Security\Core\Role\RoleInterface;
+
 /**
  * Role
  */
-class Role
+class Role implements RoleInterface
 {
     /**
      * @var int
@@ -51,5 +53,13 @@ class Role
     {
         return $this->libelle;
     }
+    /**
+     * Get Role
+     *
+     * @return Role
+     */
+     public function getRole()
+     {
+         return 'ROLE_'.strtoupper($this->libelle);
+     }
 }
-
