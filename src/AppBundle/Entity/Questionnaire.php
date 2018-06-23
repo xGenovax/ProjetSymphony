@@ -34,7 +34,7 @@ class Questionnaire
      * @var Thematique
      */
     private $thematique;
-    
+
     /**
      * @var Utilisateur
      */
@@ -199,7 +199,7 @@ class Questionnaire
      */
     public function setThematique($thematique)
     {
-        $this->$thematique = $thematique;
+        $this->thematique = $thematique;
 
         return $this;
     }

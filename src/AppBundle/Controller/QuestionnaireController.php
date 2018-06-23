@@ -44,6 +44,7 @@ class QuestionnaireController extends Controller
           $questionnaire=$entityManager->getRepository('AppBundle:Questionnaire')->find($id) ;
           if($questionnaire == null){
             $questionnaire = new Questionnaire;
+            $questionnaire->setEntraineur($this->getUser());
             $form = $this->createForm(QuestionnaireType::class, $questionnaire);
           }else{
             $form = $this->createForm(QuestionnaireType::class, $questionnaire,

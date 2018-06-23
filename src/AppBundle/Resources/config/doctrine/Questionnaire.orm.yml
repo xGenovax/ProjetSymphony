@@ -32,7 +32,7 @@ AppBundle\Entity\Questionnaire:
     manyToMany:
       questions:
         targetEntity: Question
-        cascade: ["persist"]
+        cascade: ["persist","remove"]
         joinTable:
           name: questionnaire_questions
           joinColumns:
