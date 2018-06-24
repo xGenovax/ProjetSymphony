@@ -21,6 +21,7 @@ AppBundle\Entity\Questionnaire:
       thematique:
         targetEntity: Thematique
         joinColumn:
+          nullable: false
           name: thematique_id
           referencedColumnName: id
       entraineur:

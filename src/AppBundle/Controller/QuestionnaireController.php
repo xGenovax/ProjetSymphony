@@ -95,14 +95,14 @@ class QuestionnaireController extends Controller
       //echo var_dump($query);
       $paginator  = $this->get('knp_paginator');
 
-      $blogPosts = $paginator->paginate(
+      $questionnaires = $paginator->paginate(
           $query, /* query NOT result */
           $request->query->getInt('page', 1)/*page number*/,
           $request->query->getInt('limit', 10)/*limit per page*/
       );
 
       return $this->render('questionnaire/questionnaire_list.html.twig', [
-          'blog_posts' => $blogPosts,'themes' => $themes,
+          'questionnaires' => $questionnaires,'themes' => $themes,
       ]);
   }
   /**

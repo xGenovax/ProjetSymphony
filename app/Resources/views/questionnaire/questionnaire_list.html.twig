@@ -21,23 +21,23 @@
     <table class="table table-hover table-responsive">
         <thead>
             <tr>
-                <th class="col-sm-1">{{ knp_pagination_sortable(blog_posts, 'id', 'bp.id') }}</th>
-                <th class="col-sm-5 {% if blog_posts.isSorted('bp.thematique.titre') %}sorted{% endif %}">{{ knp_pagination_sortable(blog_posts, 'Thematique', 'bp.thematique.titre') }}</th>
-                <th class="col-sm-6 {% if blog_posts.isSorted('bp.titre') %}sorted{% endif %}">{{ knp_pagination_sortable(blog_posts, 'Title', 'bp.titre') }}</th>
+                <th class="col-sm-1">{{ knp_pagination_sortable(questionnaires, 'id', 'bp.id') }}</th>
+                <th class="col-sm-5 {% if questionnaires.isSorted('bp.thematique.titre') %}sorted{% endif %}">{{ knp_pagination_sortable(questionnaires, 'Thematique', 'bp.thematique.titre') }}</th>
+                <th class="col-sm-6 {% if questionnaires.isSorted('bp.titre') %}sorted{% endif %}">{{ knp_pagination_sortable(questionnaires, 'Title', 'bp.titre') }}</th>
                 <th class="col-sm-2">Options</th>
             </tr>
         </thead>
         <tbody>
-            {% for post in blog_posts %}
+            {% for questionnaire in questionnaires %}
             <tr>
-                <td>{{ post.id }}</td>
-                <td>{{ post.thematique.titre }}</td>
-                <td>{{ post.titre }}</td>
+                <td>{{ questionnaire.id }}</td>
+                <td>{{ questionnaire.thematique.titre }}</td>
+                <td>{{ questionnaire.titre }}</td>
                 <td>
-                    <a href="{{ path('questionnaire_voir', { 'id': post.id }) }}" class="btn btn-primary btn-sm btn-block">Voir</a>
-                    {% if post.publie == false %}
-                      <a href="{{ path('questionnaire_ajouter',{ 'id': post.id }) }}" class="btn btn-primary btn-sm btn-block">Editer</a>
-                      <a href="{{ path('questionnaire_supprimer',{ 'id': post.id }) }}" class="btn btn-danger btn-sm btn-block">Supprimer</a>
+                    <a href="{{ path('questionnaire_voir', { 'id': questionnaire.id }) }}" class="btn btn-primary btn-sm btn-block">Voir</a>
+                    {% if questionnaire.publie == false %}
+                      <a href="{{ path('questionnaire_ajouter',{ 'id': questionnaire.id }) }}" class="btn btn-primary btn-sm btn-block">Editer</a>
+                      <a href="{{ path('questionnaire_supprimer',{ 'id': questionnaire.id }) }}" class="btn btn-danger btn-sm btn-block">Supprimer</a>
                     {% endif %}
                 </td>
             </tr>
@@ -46,7 +46,7 @@
     </table>
 
     <div class="navigation text-center">
-        {{ knp_pagination_render(blog_posts) }}
+        {{ knp_pagination_render(questionnaires) }}
     </div>
 
 {% endblock %}
