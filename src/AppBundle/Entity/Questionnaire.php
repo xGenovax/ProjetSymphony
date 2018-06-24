@@ -42,7 +42,6 @@ class Questionnaire
     /**
      * @Assert\Count(
      *      min = 1,
-     *      max = 10,
      *      minMessage = "At least one question to be added",
      *      maxMessage = "Not allowed"
      * )
