@@ -11,7 +11,7 @@ security:
 
         #     memory: ~
     encoders:
-        AppBundle\Entity\Utilisateur: sha512
+        AppBundle\Entity\Utilisateur: plaintext
     firewalls:
         # disables authentication for assets and the profiler, adapt it according to your needs
         dev:
