@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Les examens à corriger:</h1>
+
+    <div>
+        <form action="{{ path('examens') }}" method="get">
+            <label for="filterTheme">Thematique</label>
+            <select name="filterTheme">
+              <option value=""></option>
+              {% for theme in themes %}
+                <option value="{{theme.id}}">{{theme.titre}}</option>
+              {% endfor %}
+            </select>
+
+            <button type="submit" class="btn btn-default btn-sm">Filtrer</button>
+        </form>
+    </div>
+
+
+    <table class="table table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="col-sm-1">id</th>
+                <th class="col-sm-3">Date</th>
+                <th class="col-sm-8">Theme</th>
+                <th class="col-sm-2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exam in examens %}
+            {% if (exam.note == null) %}
+            <tr>
+                <td>{{ exam.id }}</td>
+                <td>{{ exam.date|date('d/m/Y') }}</td>
+                <td>{{ exam.questionnaire.thematique }}</td>
+                <td>
+				<a href="{{ path('examens_correction', { 'id': exam.id }) }}" class="btn btn-primary btn-sm btn-block">Corriger</a>
+
+				</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

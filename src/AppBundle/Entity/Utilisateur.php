@@ -5,6 +5,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Utilisateur
@@ -46,40 +47,24 @@ class Utilisateur implements UserInterface, EquatableInterface, \Serializable
      */
     private $username;
 
-    /**
-     * @var Role
-     */
     private $roles;
 
-    /**
-     * @var Thematique
-     */
     private $thematiques;
 
-    /**
-     * @var Examen
-     */
     private $examens_apprenant;
 
-    /**
-     * @var Examen
-     */
     private $examens_correcteur;
 
-    /**
-     * @var Questionnaire
-     */
     private $questionnaires_entraineur;
 
     // Constructeur
     public function __construct()
-
     {
       $this->roles = new ArrayCollection();
       $this->thematiques = new ArrayCollection();
-      $this->$examens_apprenant = new ArrayCollection();
-      $this->$examens_correcteur = new ArrayCollection();
-      $this->$questionnaires_entraineur = new ArrayCollection();
+      $this->examens_apprenant = new ArrayCollection();
+      $this->examens_correcteur = new ArrayCollection();
+      $this->questionnaires_entraineur = new ArrayCollection();
     }
 
     /**
@@ -385,5 +370,91 @@ class Utilisateur implements UserInterface, EquatableInterface, \Serializable
         }
 
         return true;
+    }
+
+    /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return Utilisateur
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+    /**
+     * Add examensApprenant
+     *
+     * @param \AppBundle\Entity\Examen $examensApprenant
+     *
+     * @return Utilisateur
+     */
+    public function addExamensApprenant(\AppBundle\Entity\Examen $examensApprenant)
+    {
+        $this->examens_apprenant[] = $examensApprenant;
+
+        return $this;
+    }
+
+    /**
+     * Remove examensApprenant
+     *
+     * @param \AppBundle\Entity\Examen $examensApprenant
+     */
+    public function removeExamensApprenant(\AppBundle\Entity\Examen $examensApprenant)
+    {
+        $this->examens_apprenant->removeElement($examensApprenant);
+    }
+
+    /**
+     * Add questionnairesEntraineur
+     *
+     * @param \AppBundle\Entity\Questionnaire $questionnairesEntraineur
+     *
+     * @return Utilisateur
+     */
+    public function addQuestionnairesEntraineur(\AppBundle\Entity\Questionnaire $questionnairesEntraineur)
+    {
+        $this->questionnaires_entraineur[] = $questionnairesEntraineur;
+
+        return $this;
+    }
+
+    /**
+     * Remove questionnairesEntraineur
+     *
+     * @param \AppBundle\Entity\Questionnaire $questionnairesEntraineur
+     */
+    public function removeQuestionnairesEntraineur(\AppBundle\Entity\Questionnaire $questionnairesEntraineur)
+    {
+        $this->questionnaires_entraineur->removeElement($questionnairesEntraineur);
+    }
+
+    /**
+     * Add examensCorrecteur
+     *
+     * @param \AppBundle\Entity\Examen $examensCorrecteur
+     *
+     * @return Utilisateur
+     */
+    public function addExamensCorrecteur(\AppBundle\Entity\Examen $examensCorrecteur)
+    {
+        $this->examens_correcteur[] = $examensCorrecteur;
+
+        return $this;
+    }
+
+    /**
+     * Remove examensCorrecteur
+     *
+     * @param \AppBundle\Entity\Examen $examensCorrecteur
+     */
+    public function removeExamensCorrecteur(\AppBundle\Entity\Examen $examensCorrecteur)
+    {
+        $this->examens_correcteur->removeElement($examensCorrecteur);
     }
 }

@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Examen, réponse au questionnaire {{ questionnaire.id }}:</h1>
+
+    <a href="{{ path('examens') }}">Retour</a>
+
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+<table>
+  <tr>
+    <td>Date: {{ exam.date|date('d/m/Y') }}</td>
+  </tr><tr>
+  </tr>
+</table>
+
+
+
+
+    <div>
+    {{ form_row(form.note) }}
+    </div>
+{{ form_row(form.submit) }}
+{{ form_end(form) }}
+{% endblock %}

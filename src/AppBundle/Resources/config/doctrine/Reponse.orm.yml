@@ -8,10 +8,20 @@ AppBundle\Entity\Reponse:
             id: true
             generator:
                 strategy: AUTO
+    fields:
+        reponse:
+            type: string
+            length: 255
+        correct:
+            type: boolean
+        commentaire:
+            type: string
+            length: 255
     lifecycleCallbacks: {  }
     manyToOne:
       question:
         targetEntity: Question
+        inversedBy: reponses
         joinColumn:
           name: question_id
           referencedColumnName: id

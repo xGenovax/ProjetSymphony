@@ -17,11 +17,15 @@ AppBundle\Entity\Questionnaire:
         date:
             type: date
     lifecycleCallbacks: {  }
+    oneToMany:
+      examens:
+        cascade: ["remove", "persist"]
+        targetEntity: Examen
+        mappedBy: questionnaire
     manyToOne:
       thematique:
         targetEntity: Thematique
         joinColumn:
-          nullable: false
           name: thematique_id
           referencedColumnName: id
       entraineur:
@@ -33,7 +37,7 @@ AppBundle\Entity\Questionnaire:
     manyToMany:
       questions:
         targetEntity: Question
-        cascade: ["persist","remove"]
+        cascade: ["persist"]
         joinTable:
           name: questionnaire_questions
           joinColumns:

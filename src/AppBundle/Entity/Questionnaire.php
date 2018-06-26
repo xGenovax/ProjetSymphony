@@ -47,12 +47,14 @@ class Questionnaire
      * )
      */
     private $questions;
+    private $examens;
 
     // Constructeur
     public function __construct()
     {
 
-      $this->questions = new ArrayCollection();
+          $this->questions = new ArrayCollection();
+          $this->examens = new ArrayCollection();
 
     }
 
@@ -215,5 +217,39 @@ class Questionnaire
 
     public function __toString() {
         return $this->titre;
+    }
+
+    /**
+     * Add examen
+     *
+     * @param \AppBundle\Entity\Examen $examen
+     *
+     * @return Questionnaire
+     */
+    public function addExamen(\AppBundle\Entity\Examen $examen)
+    {
+        $this->examens[] = $examen;
+
+        return $this;
+    }
+
+    /**
+     * Remove examen
+     *
+     * @param \AppBundle\Entity\Examen $examen
+     */
+    public function removeExamen(\AppBundle\Entity\Examen $examen)
+    {
+        $this->examens->removeElement($examen);
+    }
+
+    /**
+     * Get examens
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getExamens()
+    {
+        return $this->examens;
     }
 }

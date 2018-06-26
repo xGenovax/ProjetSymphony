@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Les examens corrigés:</h1>
+
+    <table class="table table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="col-sm-1">id</th>
+                <th class="col-sm-3">Date</th>
+                <th class="col-sm-4">Theme</th>
+                <th class="col-sm-6">Note</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exam in examens %}
+              <tr>
+                  <td>{{ exam.id }}</td>
+                  <td>{{ exam.date|date('d/m/Y') }}</td>
+                  <td>{{ exam.questionnaire.thematique }}</td>
+                  <td>{{ exam.note }}</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}

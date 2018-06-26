@@ -23,22 +23,58 @@
               <a class="nav-link" href="{{ path('accueil')}}">Accueil</a>
             </li>
             {% if app.user %}
+              {% if is_granted('ROLE_APPRENANT') or is_granted('ROLE_CORRECTEUR') %}
               <li class="nav-item {% if 'thematiques' in app.request.attributes.get('_route') %} active{% endif %}" >
                 <a class="nav-link" href="{{ path('thematiques')}}">Thématiques</a>
 
               </li>
+              {% endif %}
               {% if is_granted('ROLE_ENTRAINEUR') %}
                 <li class="nav-item dropdown">
-                  <a class="nav-link dropdown-toggle {% if 'questionnaires' in app.request.attributes.get('_route') %} active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <a class="nav-link dropdown-toggle {% if 'questionnaire' in app.request.attributes.get('_route') %} active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                     Mes Questionnaires
                   </a>
                   <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="{{ path('questionnaire_list')}}">Voir</a>
                     <a class="dropdown-item" href="{{ path('questionnaire_ajouter',{ 'id': 0 })}}">Nouveau</a>
+                  </div>
+                </li>
+              {% endif %}
+              {% if is_granted('ROLE_APPRENANT') %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle {% if 'questionnaire' in app.request.attributes.get('_route') %} active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mes Questionnaires
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('questionnaire_par_thematique')}}">Voir</a>
+                  </div>
+                </li>
+              {% endif %}
+              {% if is_granted('ROLE_CORRECTEUR') %}
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle {% if 'examens' in app.request.attributes.get('_route') %} active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Mes examens à corriger
+                  </a>
+                  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('examens')}}">Voir</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="#">Something else here</a>
                   </div>
                 </li>
+                  <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle {% if 'examens' in app.request.attributes.get('_route') %} active{% endif %}" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Mes examens corrigés
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                      <a class="dropdown-item" href="{{ path('examens_list_correction')}}">Voir</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                  </li>
+
+
+
+
               {% endif %}
             {% endif %}
           </ul>

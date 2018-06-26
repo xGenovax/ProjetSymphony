@@ -1,0 +1,28 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Examen, réponse au questionnaire {{ questionnaire.id }}:</h1>
+
+    <a href="{{ path('questionnaire_par_thematique') }}">Abandonner</a>
+
+{{ form_start(form) }}
+    {{ form_errors(form) }}
+<table>
+  <tr>
+    <td>{{ form_row(form.date) }}</td>
+  </tr><tr>
+  </tr>
+</table>
+
+
+
+    <h3>Réponses</h3>
+    <ul>
+        {% for reponse in form.reponses %}
+            <li>{{ form_row(reponse.question) }}</li>
+            <li>{{ form_row(reponse.reponse) }}</li>
+        {% endfor %}
+    </ul>
+{{ form_row(form.submit) }}
+{{ form_end(form) }}
+{% endblock %}

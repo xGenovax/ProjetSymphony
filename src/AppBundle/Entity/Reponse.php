@@ -56,7 +56,7 @@ class Reponse
      */
     public function setReponse($reponse)
     {
-        $this->$reponse = $reponse;
+        $this->reponse = $reponse;
 
         return $this;
     }
@@ -68,7 +68,7 @@ class Reponse
      */
     public function getReponse()
     {
-        return $this->$reponse;
+        return $this->reponse;
     }
 
     /**
@@ -80,7 +80,7 @@ class Reponse
      */
     public function setCommentaire($commentaire)
     {
-        $this->$commentaire = $commentaire;
+        $this->commentaire = $commentaire;
 
         return $this;
     }
@@ -92,7 +92,7 @@ class Reponse
      */
     public function getCommentaire()
     {
-        return $this->$commentaire;
+        return $this->commentaire;
     }
 
     /**

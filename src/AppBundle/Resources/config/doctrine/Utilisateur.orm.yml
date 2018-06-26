@@ -48,7 +48,6 @@ AppBundle\Entity\Utilisateur:
               referencedColumnName: id
     oneToMany:
       examens_apprenant:
-        cascade: ["remove"]
         targetEntity: Examen
         mappedBy: apprenant
       questionnaires_entraineur:

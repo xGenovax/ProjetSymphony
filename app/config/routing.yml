@@ -16,9 +16,34 @@ login_check:
 logout:
     path: /logout
 #Avec authentification
+examens:
+    path: /examens
+    defaults: { _controller: AppBundle:Examen:consulterExams}
+examens_correction:
+    path: /examens/correction/{id}
+    defaults: { _controller: AppBundle:Examen:corrigerExam}
+    requirements:
+        id:  \d+
+examens_list_correction:
+    path: /examens/correction
+    defaults: { _controller: AppBundle:Examen:consulterExamsCorrige}
 thematiques:
     path: /thematiques
-    defaults: { _controller: AppBundle:Default:consulterThematiques}
+    defaults: { _controller: AppBundle:Thematique:consulterThematiques}
+ajouter_thematique_user:
+    path: /thematiques/user/add
+    defaults: { _controller: AppBundle:Thematique:ajouterThematiqueUtilisateur}
+supprimer_thematique_user:
+    path: /thematiques/user/delete
+    defaults: { _controller: AppBundle:Thematique:supprimerThematiqueUtilisateur}
+questionnaire_par_thematique:
+    path: /thematiques/questionnaires
+    defaults: { _controller: AppBundle:Questionnaire:questionnaireParThematique}
+questionnaire_repondre:
+    path: /questionnaire/repondre/{id}
+    defaults: { _controller: AppBundle:Questionnaire:repondreQuestionnaire}
+    requirements:
+        id:  \d+
 questionnaire_voir:
     path:  /questionnaire/voir/{id}
     defaults: { _controller: AppBundle:Questionnaire:voirQuestionnaire}

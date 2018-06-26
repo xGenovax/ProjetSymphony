@@ -9,7 +9,10 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Thematique;
+use AppBundle\Entity\Examen;
+use AppBundle\Entity\Reponse;
 use AppBundle\Form\Type\QuestionnaireType;
+use AppBundle\Form\ExamenType;
 /**
  * Questionnaire controller.
  *
@@ -101,6 +104,87 @@ class QuestionnaireController extends Controller
           'questionnaires' => $questionnaires,'themes' => $themes,
       ]);
   }
+
+
+    public function questionnaireParThematiqueAction(Request $request){
+
+
+		$user = $this->getUser();
+		$thematiques = $user->getThematiques();
+
+		$a = array();
+
+if ($request->query->getAlnum('filterTheme')) {
+  $t = $this->getDoctrine()
+->getRepository(Thematique::class)->find($request->query->getAlnum('filterTheme'));
+  $a = $this->getDoctrine()
+->getRepository(Questionnaire::class)->findBy(array('thematique' => $t));
+} else {
+
+
+  		foreach($thematiques as $t) {
+  			$questionnaires = $this->getDoctrine()
+  	  ->getRepository(Questionnaire::class)->findBy(array('thematique' => $t));
+
+  			$a = array_merge($a, $questionnaires);
+  		}
+
+}
+
+
+
+
+
+      return $this->render('questionnaire/questionnaire_list_by_thematique.html.twig', [
+		'questionnaires' => $a,
+    'themes' => $thematiques
+      ]);
+    }
+  public function repondreQuestionnaireAction(Request $request, $id)
+  {
+    $entityManager = $this->getDoctrine()->getManager();
+    $questionnaire = $entityManager->getRepository('AppBundle:Questionnaire')->find($id) ;
+	  $examen = new Examen();
+
+	   foreach($questionnaire->getQuestions() as $question) {
+        $reponse = new Reponse();
+        $reponse->setQuestion($question);
+        $examen->getReponses()->add($reponse);
+	   }
+
+	   $form = $this->createForm(ExamenType::class, $examen,
+                       array('action' => $this->generateUrl('questionnaire_repondre',
+                                            array('id' => $questionnaire->getId())) ));
+
+
+
+    $form->add('submit', SubmitType::class, array('label' => 'Répondre'));
+		// synchronise les données presente dans request avec le formulaire (rempli la variable $form avec le contenu de $request)
+    $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+			       $user = $this->getUser();
+				          $examen->setRendu(true);
+                  $examen->setApprenant($user);
+                  $examen->setQuestionnaire($questionnaire);
+                  $entityManager->persist($examen);
+
+
+
+                  $entityManager->flush();
+                  $url = $this->generateUrl('questionnaire_par_thematique',
+                                             array());
+                  return $this->redirect($url);
+
+		}
+
+        return $this->render('examen/examen_create.html.twig', array(
+            'form' => $form->createView(),
+			'questionnaire' => $questionnaire,
+			'examen' => $examen
+	));
+  }
+
   /**
    * Deletes a questionnaire entity.
    *

@@ -1,5 +1,46 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-<h1>Mes thematiques :</h1>
+<h1>Les thematiques de l'utilisateur {{ user.prenom }} {{ user.nom }}:</h1>
+
+<div>
+        <form action="{{ path('ajouter_thematique_user') }}" method="post">
+            <label for="thematique">Thematique</label>
+            <select name="thematique">
+              <option value=""></option>
+              {% for theme in themes %}
+                <option value="{{theme.id}}">{{theme.titre}}</option>
+              {% endfor %}
+            </select>
+<input name="user" type="hidden" value="{{ user.id }}">
+            <button type="submit" class="btn btn-default btn-sm">Ajouter</button>
+        </form>
+    </div>
+
+
+    <table class="table table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="col-sm-1">id</th>
+                <th class="col-sm-11">Titre</th>
+                <th class="col-sm-2">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for thematique in thematique_user %}
+            <tr>
+                <td>{{ thematique.id }}</td>
+                <td>{{ thematique.titre }}</td>
+                <td>
+				  <form action="{{ path('supprimer_thematique_user') }}" method="post">
+					<input name="thematique" type="hidden" value="{{ thematique.id }}">
+					<button type="submit" class="btn btn-danger btn-sm btn-block">Supprimer</button>
+				</form>
+				</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
 {% endblock %}

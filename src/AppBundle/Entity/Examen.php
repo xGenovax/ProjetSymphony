@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Examen
  */
@@ -27,9 +29,6 @@ class Examen
      */
     private $rendu;
 
-    /**
-     * @var Reponse
-     */
     private $reponses;
 
     /**
@@ -41,6 +40,11 @@ class Examen
      * @var Utilisateur
      */
     private $correcteur;
+
+    /**
+     * @var Questionnaire
+     */
+    private $questionnaire;
 
     // Constructeur
     public function __construct()
@@ -203,5 +207,29 @@ class Examen
     public function getRendu()
     {
         return $this->rendu;
+    }
+
+    /**
+     * Set questionnaire
+     *
+     * @param \AppBundle\Entity\Questionnaire $questionnaire
+     *
+     * @return Examen
+     */
+    public function setQuestionnaire(\AppBundle\Entity\Questionnaire $questionnaire = null)
+    {
+        $this->questionnaire = $questionnaire;
+
+        return $this;
+    }
+
+    /**
+     * Get questionnaire
+     *
+     * @return \AppBundle\Entity\Questionnaire
+     */
+    public function getQuestionnaire()
+    {
+        return $this->questionnaire;
     }
 }

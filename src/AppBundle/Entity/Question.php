@@ -2,6 +2,8 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+
 /**
  * Question
  */
@@ -16,7 +18,15 @@ class Question
      * @var string
      */
     private $question;
+   private $reponses;
 
+       // Constructeur
+       public function __construct()
+       {
+
+               $this->reponses = new ArrayCollection();
+
+       }
 
     /**
      * Get id

@@ -1,0 +1,42 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+
+
+    <div>
+        <form action="{{ path('questionnaire_par_thematique') }}" method="get">
+            <label for="filterTheme">Thematique</label>
+            <select name="filterTheme">
+              <option value=""></option>
+              {% for theme in themes %}
+                <option value="{{theme.id}}">{{theme.titre}}</option>
+              {% endfor %}
+            </select>
+
+            <button type="submit" class="btn btn-default btn-sm">Filtrer</button>
+        </form>
+    </div>
+
+    <table class="table table-hover table-responsive">
+        <thead>
+            <tr>
+                <th class="col-sm-1">id</th>
+                <th class="col-sm-5">Thematique</th>
+                <th class="col-sm-6">titre</th>
+                <th class="col-sm-2">Options</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for questionnaire in questionnaires %}
+            <tr>
+                <td>{{ questionnaire.id }}</td>
+                <td>{{ questionnaire.thematique.titre }}</td>
+                <td>{{ questionnaire.titre }}</td>
+                <td>
+                    <a href="{{ path('questionnaire_repondre', { 'id': questionnaire.id }) }}" class="btn btn-primary btn-sm btn-block">Répondre</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
