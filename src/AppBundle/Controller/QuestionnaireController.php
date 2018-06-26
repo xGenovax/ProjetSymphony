@@ -21,23 +21,19 @@ class QuestionnaireController extends Controller
   *QUESTIONNAIRES
   *
   */
-  public function consulterQuestionnairesAction(){
-    $repository = $this->getDoctrine()->getRepository(Questionnaire::class);
-    $products = $repository->findAll();
-    // replace this example code with whatever you need
-    return $this->render('questionnaire/questionnaires.html.twig', [
-      'products' => $products
-    ]);
-  }
-
   public function voirQuestionnaireAction(Questionnaire $questionnaire)
   {
-      $deleteForm = $this->createDeleteForm($questionnaire);
+    if ($questionnaire->getEntraineur()->isEqualTo($this->getUser())) {
 
+      $deleteForm = $this->createDeleteForm($questionnaire);
       return $this->render('questionnaire/questionnaire_voir.html.twig', array(
           'questionnaire' => $questionnaire,
           'delete_form' => $deleteForm->createView(),
       ));
+    }
+    else{
+      return $this->redirectToRoute('questionnaire_list');
+    }
   }
   public function ajouterQuestionnaireAction(Request $request, $id) {
           $entityManager = $this->getDoctrine()->getManager();
@@ -113,14 +109,13 @@ class QuestionnaireController extends Controller
    */
   public function deleteAction(Request $request, Questionnaire $questionnaire)
   {
-      $form = $this->createDeleteForm($questionnaire);
-      $form->handleRequest($request);
-
-      //if ($form->isSubmitted() && $form->isValid()) {
-          $em = $this->getDoctrine()->getManager();
-          $em->remove($questionnaire);
-          $em->flush();
-      //}
+      if ($questionnaire->getEntraineur()->isEqualTo($this->getUser())) {
+        $form = $this->createDeleteForm($questionnaire);
+        $form->handleRequest($request);
+        $em = $this->getDoctrine()->getManager();
+        $em->remove($questionnaire);
+        $em->flush();
+      }
 
       return $this->redirectToRoute('questionnaire_list');
   }

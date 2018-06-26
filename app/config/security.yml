@@ -43,4 +43,4 @@ security:
         - { path: ^/questionnaire, role: ROLE_ENTRAINEUR }
         - { path: ^/thematiques, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/utilisateur, role: IS_AUTHENTICATED_FULLY }
-        - { path: ^/accueil, role: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/accueil$, role: IS_AUTHENTICATED_ANONYMOUSLY }

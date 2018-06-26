@@ -23,7 +23,7 @@
             <tr>
                 <th class="col-sm-1">{{ knp_pagination_sortable(questionnaires, 'id', 'bp.id') }}</th>
                 <th class="col-sm-5 {% if questionnaires.isSorted('bp.thematique.titre') %}sorted{% endif %}">{{ knp_pagination_sortable(questionnaires, 'Thematique', 'bp.thematique.titre') }}</th>
-                <th class="col-sm-6 {% if questionnaires.isSorted('bp.titre') %}sorted{% endif %}">{{ knp_pagination_sortable(questionnaires, 'Title', 'bp.titre') }}</th>
+                <th class="col-sm-6 {% if questionnaires.isSorted('bp.titre') %}sorted{% endif %}">{{ knp_pagination_sortable(questionnaires, 'Titre', 'bp.titre') }}</th>
                 <th class="col-sm-2">Options</th>
             </tr>
         </thead>

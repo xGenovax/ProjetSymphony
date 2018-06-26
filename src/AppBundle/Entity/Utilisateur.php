@@ -380,7 +380,7 @@ class Utilisateur implements UserInterface, EquatableInterface, \Serializable
             return false;
         }
 
-        if ($this->email !== $user->getUsername()) {
+        if ($this->username !== $user->getUsername()) {
             return false;
         }
 
