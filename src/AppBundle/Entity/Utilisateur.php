@@ -461,4 +461,13 @@ class Utilisateur implements UserInterface, EquatableInterface, \Serializable
     {
         $this->examens_correcteur->removeElement($examensCorrecteur);
     }
+
+    public function isEntraineur(){
+      $permission = false;
+      foreach($this->getRoles() as $role) {
+        if($role == "ROLE_ENTRAINEUR")
+          $permission = true;
+      }
+      return $permission;
+    }
 }

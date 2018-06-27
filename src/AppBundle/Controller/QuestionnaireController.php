@@ -39,31 +39,39 @@ class QuestionnaireController extends Controller
     }
   }
   public function ajouterQuestionnaireAction(Request $request, $id) {
-          $entityManager = $this->getDoctrine()->getManager();
-          $questionnaire=$entityManager->getRepository('AppBundle:Questionnaire')->find($id) ;
-          if($questionnaire == null){
-            $questionnaire = new Questionnaire;
-            $questionnaire->setEntraineur($this->getUser());
-            $form = $this->createForm(QuestionnaireType::class, $questionnaire);
+
+      if($this->getUser()->isEntraineur()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $questionnaire=$entityManager->getRepository('AppBundle:Questionnaire')->find($id) ;
+            if($questionnaire == null){
+              $questionnaire = new Questionnaire;
+              $questionnaire->setEntraineur($this->getUser());
+              $form = $this->createForm(QuestionnaireType::class, $questionnaire);
+          }else{
+              $form = $this->createForm(QuestionnaireType::class, $questionnaire,
+                  array('action' => $this->generateUrl('questionnaire_ajouter',
+                      array('id' => $questionnaire->getId())) ));
+          }
+
+          $form->add('submit', SubmitType::class, array('label' => 'Enregistrer'));
+          $form->handleRequest($request);
+          if ($form->isSubmitted() && $form->isValid()) {
+              $questionnaire->setDate(new \DateTime());
+              $entityManager = $this->getDoctrine()->getManager();
+              $entityManager->persist($questionnaire);
+              $entityManager->flush();
+              $url = $this->generateUrl('questionnaire_list',
+                  array());
+              return $this->redirect($url);
+          }
+          return $this->render('questionnaire/questionnaire_edit.html.twig',
+              array('monFormulaire' => $form->createView()));
         }else{
-            $form = $this->createForm(QuestionnaireType::class, $questionnaire,
-                array('action' => $this->generateUrl('questionnaire_ajouter',
-                    array('id' => $questionnaire->getId())) ));
+          $url = $this->generateUrl('accueil',
+              array());
+          return $this->redirect($url);
         }
 
-        $form->add('submit', SubmitType::class, array('label' => 'Enregistrer'));
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $questionnaire->setDate(new \DateTime());
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($questionnaire);
-            $entityManager->flush();
-            $url = $this->generateUrl('questionnaire_list',
-                array());
-            return $this->redirect($url);
-        }
-        return $this->render('questionnaire/questionnaire_edit.html.twig',
-            array('monFormulaire' => $form->createView()));
     }
 
     /**
@@ -71,6 +79,8 @@ class QuestionnaireController extends Controller
      */
     public function listQuestionnaireAction(Request $request)
     {
+      if($this->getUser()->isEntraineur()){
+
         $themes = $this->getDoctrine()
             ->getRepository(Thematique::class)
             ->findAll();
@@ -103,6 +113,11 @@ class QuestionnaireController extends Controller
       return $this->render('questionnaire/questionnaire_list.html.twig', [
           'questionnaires' => $questionnaires,'themes' => $themes,
       ]);
+    }else{
+      $url = $this->generateUrl('accueil',
+          array());
+      return $this->redirect($url);
+    }
   }
 
 
@@ -194,7 +209,8 @@ if ($request->query->getAlnum('filterTheme')) {
    */
   public function deleteAction(Request $request, Questionnaire $questionnaire)
   {
-      if ($questionnaire->getEntraineur()->isEqualTo($this->getUser())) {
+
+      if ($this->getUser()->isEntraineur() && $questionnaire->getEntraineur()->isEqualTo($this->getUser()) && !$questionnaire->getPublie()) {
         $form = $this->createDeleteForm($questionnaire);
         $form->handleRequest($request);
         $em = $this->getDoctrine()->getManager();
