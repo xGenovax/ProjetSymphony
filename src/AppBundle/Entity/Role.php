@@ -56,10 +56,14 @@ class Role implements RoleInterface
     /**
      * Get Role
      *
-     * @return Role
+     * @return String
      */
      public function getRole()
      {
          return 'ROLE_'.strtoupper($this->libelle);
+     }
+
+     public function __toString() {
+         return $this->getRole();
      }
 }

@@ -45,54 +45,54 @@ class QuestionnaireController extends Controller
             $questionnaire = new Questionnaire;
             $questionnaire->setEntraineur($this->getUser());
             $form = $this->createForm(QuestionnaireType::class, $questionnaire);
-          }else{
+        }else{
             $form = $this->createForm(QuestionnaireType::class, $questionnaire,
-                       array('action' => $this->generateUrl('questionnaire_ajouter',
-                                            array('id' => $questionnaire->getId())) ));
-          }
+                array('action' => $this->generateUrl('questionnaire_ajouter',
+                    array('id' => $questionnaire->getId())) ));
+        }
 
-          $form->add('submit', SubmitType::class, array('label' => 'Enregistrer'));
-          $form->handleRequest($request);
-          if ($form->isSubmitted() && $form->isValid()) {
-                  $questionnaire->setDate(new \DateTime());
-                  $entityManager = $this->getDoctrine()->getManager();
-                  $entityManager->persist($questionnaire);
-                  $entityManager->flush();
-                  $url = $this->generateUrl('questionnaire_list',
-                                             array());
-                  return $this->redirect($url);
-          }
-          return $this->render('questionnaire/questionnaire_edit.html.twig',
-                               array('monFormulaire' => $form->createView()));
-  }
+        $form->add('submit', SubmitType::class, array('label' => 'Enregistrer'));
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $questionnaire->setDate(new \DateTime());
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($questionnaire);
+            $entityManager->flush();
+            $url = $this->generateUrl('questionnaire_list',
+                array());
+            return $this->redirect($url);
+        }
+        return $this->render('questionnaire/questionnaire_edit.html.twig',
+            array('monFormulaire' => $form->createView()));
+    }
 
-  /**
-   * @Route("/", name="listQuestionnaire")
-   */
-  public function listQuestionnaireAction(Request $request)
-  {
-    $themes = $this->getDoctrine()
-  ->getRepository(Thematique::class)
-  ->findAll();
+    /**
+     * @Route("/", name="listQuestionnaire")
+     */
+    public function listQuestionnaireAction(Request $request)
+    {
+        $themes = $this->getDoctrine()
+            ->getRepository(Thematique::class)
+            ->findAll();
 
-      $em = $this->getDoctrine()->getManager();
+        $em = $this->getDoctrine()->getManager();
 
-      $queryBuilder = $em->getRepository('AppBundle:Questionnaire')->createQueryBuilder('bp');
+        $queryBuilder = $em->getRepository('AppBundle:Questionnaire')->createQueryBuilder('bp');
 
-      $queryBuilder->addSelect('u')->join('bp.entraineur', 'u')->andWhere('u.id = :idu')
-          ->setParameter('idu', $this->getUser()->getId());
+        $queryBuilder->addSelect('u')->join('bp.entraineur', 'u')->andWhere('u.id = :idu')
+            ->setParameter('idu', $this->getUser()->getId());
 
-      if ($request->query->getAlnum('filter')) {
-          $queryBuilder->andWhere('bp.titre LIKE :titre')
-              ->setParameter('titre', '%' . $request->query->getAlnum('filter') . '%');
-      }
-      if ($request->query->getAlnum('filterTheme')) {
-          $queryBuilder->addSelect('r')->join('bp.thematique', 'r')->andWhere('r.id = :idt')
-              ->setParameter('idt', $request->query->getAlnum('filterTheme'));
-      }
-      $query = $queryBuilder->getQuery();
-      //echo var_dump($query);
-      $paginator  = $this->get('knp_paginator');
+        if ($request->query->getAlnum('filter')) {
+            $queryBuilder->andWhere('bp.titre LIKE :titre')
+                ->setParameter('titre', '%' . $request->query->getAlnum('filter') . '%');
+        }
+        if ($request->query->getAlnum('filterTheme')) {
+            $queryBuilder->addSelect('r')->join('bp.thematique', 'r')->andWhere('r.id = :idt')
+                ->setParameter('idt', $request->query->getAlnum('filterTheme'));
+        }
+        $query = $queryBuilder->getQuery();
+        //echo var_dump($query);
+        $paginator  = $this->get('knp_paginator');
 
       $questionnaires = $paginator->paginate(
           $query, /* query NOT result */
@@ -202,20 +202,20 @@ if ($request->query->getAlnum('filterTheme')) {
         $em->flush();
       }
 
-      return $this->redirectToRoute('questionnaire_list');
-  }
-  /**
-   * Creates a form to delete a questionnaire entity.
-   *
-   * @param Questionnaire $questionnaire The questionnaire entity
-   *
-   * @return \Symfony\Component\Form\Form The form
-   */
-  private function createDeleteForm(Questionnaire $questionnaire)
-  {
-      return $this->createFormBuilder()
-          ->setAction($this->generateUrl('questionnaire_supprimer', array('id' => $questionnaire->getId())))
-          ->getForm()
-      ;
-  }
+        return $this->redirectToRoute('questionnaire_list');
+    }
+    /**
+     * Creates a form to delete a questionnaire entity.
+     *
+     * @param Questionnaire $questionnaire The questionnaire entity
+     *
+     * @return \Symfony\Component\Form\Form The form
+     */
+    private function createDeleteForm(Questionnaire $questionnaire)
+    {
+        return $this->createFormBuilder()
+            ->setAction($this->generateUrl('questionnaire_supprimer', array('id' => $questionnaire->getId())))
+            ->getForm()
+            ;
+    }
 }

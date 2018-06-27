@@ -66,3 +66,11 @@ questionnaire_list:
 compte:
     path: /moncompte
     defaults: { _controller: AppBundle:Default:consulterCompte}
+    
+app_utilisateur:
+    resource: "@AppBundle/Resources/config/routing/utilisateur.yml"
+    prefix:   /utilisateur
+
+app_thematique:
+    resource: "@AppBundle/Resources/config/routing/thematique.yml"
+    prefix:   /thematique

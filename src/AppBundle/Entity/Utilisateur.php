@@ -3,9 +3,10 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\EquatableInterface;
-use Doctrine\Common\Collections\ArrayCollection;
+
 
 /**
  * Utilisateur
@@ -308,6 +309,21 @@ class Utilisateur implements UserInterface, EquatableInterface, \Serializable
     }
 
     /**
+     * Set username
+     *
+     * @param string $username
+     *
+     * @return Utilisateur
+     */
+    public function setUsername($username)
+    {
+        $this->username = $username;
+
+        return $this;
+    }
+
+
+    /**
      * Get password
      *
      * @return string
@@ -372,19 +388,7 @@ class Utilisateur implements UserInterface, EquatableInterface, \Serializable
         return true;
     }
 
-    /**
-     * Set username
-     *
-     * @param string $username
-     *
-     * @return Utilisateur
-     */
-    public function setUsername($username)
-    {
-        $this->username = $username;
 
-        return $this;
-    }
 
     /**
      * Add examensApprenant

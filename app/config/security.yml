@@ -19,7 +19,7 @@ security:
             security: false
 
         main:
-            pattern: ^/(questionnaire|login_check|logout|accueil|thematiques|utilisateur|examens|moncompte)
+            pattern: ^/(questionnaire|login_check|logout|accueil|thematique|thematiques$|utilisateur|examens|moncompte)
             form_login:
                 login_path: /login
                 check_path: /login_check
@@ -43,7 +43,8 @@ security:
         - { path: ^/questionnaire/repondre, role: ROLE_APPRENANT }
         - { path: ^/questionnaire, role: ROLE_ENTRAINEUR }
         - { path: ^/thematiques/questionnaires, role: ROLE_APPRENANT }
-        - { path: ^/thematiques, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/thematiques$, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/thematique, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/examens, role: ROLE_CORRECTEUR }
         - { path: ^/utilisateur, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/moncompte$, role: IS_AUTHENTICATED_FULLY }

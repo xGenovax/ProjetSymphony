@@ -1,0 +1,24 @@
+thematique_index:
+    path:     /
+    defaults: { _controller: "AppBundle:Thematique:index" }
+    methods:  GET
+
+thematique_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Thematique:show" }
+    methods:  GET
+
+thematique_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Thematique:new" }
+    methods:  [GET, POST]
+
+thematique_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Thematique:edit" }
+    methods:  [GET, POST]
+
+thematique_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Thematique:delete" }
+    methods:  DELETE
