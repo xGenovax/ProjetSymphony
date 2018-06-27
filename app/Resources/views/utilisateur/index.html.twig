@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+
+{% block body %}
+    <a class="nav-link btn btn-primary" href="{{ path('utilisateur_new')}}">Nouvel utilisateur</a>
+    <div>
+        <form action="{{ path('utilisateur_index') }}" method="get">
+            <label for="filter">Nom</label>
+            <input name="filter" type="text">
+            <button type="submit" class="btn btn-default btn-sm">Filtrer</button>
+        </form>
+    </div>
+
+    <table class="table table-hover table-responsive">
+        <thead>
+        <td>{{ utilisateur.nom }}</td>
+        <td>{{ utilisateur.prenom }}</td>
+        <td>{{ utilisateur.email }}</td>
+        <td>{{ utilisateur.password }}</td>
+        <td>{{ utilisateur.username }}</td>
+        <tr>
+            <th class="col-sm-1">{{ knp_pagination_sortable(utilisateurs, 'id', 'bp.id') }}</th>
+            <th class="col-sm-5 {% if utilisateurs.isSorted('bp.nom') %}sorted{% endif %}">{{ knp_pagination_sortable(utilisateurs, 'Nom', 'bp.nom') }}</th>
+            <th class="col-sm-5 {% if utilisateurs.isSorted('bp.prenom') %}sorted{% endif %}">{{ knp_pagination_sortable(utilisateurs, 'Prenom', 'bp.prenom') }}</th>
+            <th class="col-sm-5 {% if utilisateurs.isSorted('bp.email') %}sorted{% endif %}">{{ knp_pagination_sortable(utilisateurs, 'Email', 'bp.email') }}</th>
+            <th class="col-sm-5 {% if utilisateurs.isSorted('bp.password') %}sorted{% endif %}">{{ knp_pagination_sortable(utilisateurs, 'Password', 'bp.password') }}</th>
+            <th class="col-sm-6 {% if utilisateurs.isSorted('bp.username') %}sorted{% endif %}">{{ knp_pagination_sortable(utilisateurs, 'Identifiant', 'bp.username') }}</th>
+            <th class="col-sm-2">Options</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for utilisateur in utilisateurs %}
+            <tr>
+                <td>{{ utilisateur.id }}</td>
+                <td>{{ utilisateur.nom }}</td>
+                <td>{{ utilisateur.prenom }}</td>
+                <td>{{ utilisateur.email }}</td>
+                <td>{{ utilisateur.password }}</td>
+                <td>{{ utilisateur.username }}</td>
+                <td>
+                    <a href="{{ path('utilisateur_show', { 'id': utilisateur.id }) }}" class="btn btn-primary btn-sm btn-block">Voir</a>
+                    <a href="{{ path('utilisateur_edit',{ 'id': utilisateur.id }) }}" class="btn btn-primary btn-sm btn-block">Editer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <div class="navigation text-center">
+        {{ knp_pagination_render(utilisateurs) }}
+    </div>
+
+{% endblock %}

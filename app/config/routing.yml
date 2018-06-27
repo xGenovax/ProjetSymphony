@@ -16,9 +16,9 @@ login_check:
 logout:
     path: /logout
 #Avec authentification
-thematiques:
-    path: /thematiques
-    defaults: { _controller: AppBundle:Default:consulterThematiques}
+#thematiques:
+#    path: /thematiques
+#    defaults: { _controller: AppBundle:Default:consulterThematiques}
 questionnaire_voir:
     path:  /questionnaire/voir/{id}
     defaults: { _controller: AppBundle:Questionnaire:voirQuestionnaire}
@@ -38,6 +38,35 @@ questionnaire_list:
       path:  /questionnaire/
       defaults: { _controller: AppBundle:Questionnaire:listQuestionnaire}
 
-utilisateur:
-    path: /utilisateur
-    defaults: { _controller: AppBundle:Default:consulterUtilisateur}
+#utilisateur_index:
+#    path:     /
+#    defaults: { _controller: "AppBundle:Utilisateur:index" }
+#    methods:  GET
+
+#utilisateur_show:
+#    path:     /{id}/show
+#   defaults: { _controller: "AppBundle:Utilisateur:show" }
+#   methods:  GET
+
+#utilisateur_new:
+#    path:     /new
+#    defaults: { _controller: "AppBundle:Utilisateur:new" }
+#    methods:  [GET, POST]
+
+#utilisateur_edit:
+#    path:     /{id}/edit
+#    defaults: { _controller: "AppBundle:Utilisateur:edit" }
+#    methods:  [GET, POST]
+
+#utilisateur_delete:
+#    path:     /{id}/delete
+#    defaults: { _controller: "AppBundle:Utilisateur:delete" }
+#    methods:  DELETE
+
+app_utilisateur:
+    resource: "@AppBundle/Resources/config/routing/utilisateur.yml"
+    prefix:   /utilisateur
+
+app_thematique:
+    resource: "@AppBundle/Resources/config/routing/thematique.yml"
+    prefix:   /thematique
