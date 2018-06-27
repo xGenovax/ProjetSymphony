@@ -25,11 +25,14 @@
             {% if app.user %}
               {% if is_granted('ROLE_APPRENANT') or is_granted('ROLE_CORRECTEUR') %}
               <li class="nav-item {% if 'thematiques' in app.request.attributes.get('_route') %} active{% endif %}" >
-                <a class="nav-link" href="{{ path('thematique_index')}}">Thématiques</a>
+                <a class="nav-link" href="{{ path('thematiques')}}">Thématiques</a>
 
               </li>
               {% endif %}
               {% if is_granted('ROLE_SECRETAIRE') %}
+                <li class="nav-item {% if 'thematiques' in app.request.attributes.get('_route') %} active{% endif %}" >
+                  <a class="nav-link" href="{{ path('thematique_index')}}">Thématiques</a>
+
                 <li class="nav-item {% if 'utilisateur' in app.request.attributes.get('_route') %} active{% endif %}" >
                     <a class="nav-link" href="{{ path('utilisateur_index')}}">Utilisateurs</a>
 
