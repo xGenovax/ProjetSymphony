@@ -27,12 +27,12 @@ class DefaultController extends Controller
           'base_dir' => realpath($this->getParameter('kernel.project_dir')).DIRECTORY_SEPARATOR,
       ]);
     }
-	
 
-    public function consulterUtilisateurAction(){
+
+    public function consulterCompteAction(){
       // replace this example code with whatever you need
-      return $this->render('default/utilisateur.html.twig', [
-
+      return $this->render('default/compte.html.twig', [
+        'compte' => $this->getUser(),
       ]);
     }
 }

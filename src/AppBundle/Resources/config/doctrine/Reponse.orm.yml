@@ -13,8 +13,10 @@ AppBundle\Entity\Reponse:
             type: string
             length: 255
         correct:
+            nullable: true
             type: boolean
         commentaire:
+            nullable: true
             type: string
             length: 255
     lifecycleCallbacks: {  }

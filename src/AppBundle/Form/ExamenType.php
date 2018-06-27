@@ -16,8 +16,7 @@ class ExamenType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('date')
-                ->add('reponses', CollectionType::class, array(
+        $builder->add('reponses', CollectionType::class, array(
                     'entry_type'   => ReponseType::class,
                     'allow_add'    => false,
                     'allow_delete' => false,

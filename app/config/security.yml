@@ -19,7 +19,7 @@ security:
             security: false
 
         main:
-            pattern: ^/(questionnaire|login_check|logout|accueil|thematiques|utilisateur|examens)
+            pattern: ^/(questionnaire|login_check|logout|accueil|thematiques|utilisateur|examens|moncompte)
             form_login:
                 login_path: /login
                 check_path: /login_check
@@ -46,4 +46,5 @@ security:
         - { path: ^/thematiques, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/examens, role: ROLE_CORRECTEUR }
         - { path: ^/utilisateur, role: IS_AUTHENTICATED_FULLY }
+        - { path: ^/moncompte$, role: IS_AUTHENTICATED_FULLY }
         - { path: ^/accueil$, role: IS_AUTHENTICATED_ANONYMOUSLY }

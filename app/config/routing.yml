@@ -63,6 +63,6 @@ questionnaire_list:
       path:  /questionnaire/
       defaults: { _controller: AppBundle:Questionnaire:listQuestionnaire}
 
-utilisateur:
-    path: /utilisateur
-    defaults: { _controller: AppBundle:Default:consulterUtilisateur}
+compte:
+    path: /moncompte
+    defaults: { _controller: AppBundle:Default:consulterCompte}

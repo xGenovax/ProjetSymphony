@@ -167,6 +167,7 @@ if ($request->query->getAlnum('filterTheme')) {
 				          $examen->setRendu(true);
                   $examen->setApprenant($user);
                   $examen->setQuestionnaire($questionnaire);
+                  $examen->setDate(new \DateTime());
                   $entityManager->persist($examen);
 
 

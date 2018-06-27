@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<h1>Mes informations :</h1>
+Identidé: {{ compte.prenom }} {{ compte.nom }}
+<br/>
+Courriel: {{ compte.email }}
+<br/>
+Identifiant: {{ compte.username }}
+<br/>
+Roles :
+{% for role in compte.roles %}
+  <strong>{{ role.libelle }}</strong>;
+{% endfor %}
+{% endblock %}

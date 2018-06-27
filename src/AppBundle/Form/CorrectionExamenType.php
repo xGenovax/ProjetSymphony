@@ -16,8 +16,7 @@ class CorrectionExamenType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder
-                ->add('reponses', CollectionType::class, array(
+        $builder->add('reponses', CollectionType::class, array(
                     'entry_type'   => CorrectionReponseType::class,
                     'allow_add'    => false,
                     'allow_delete' => false,
