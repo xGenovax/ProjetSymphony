@@ -84,7 +84,7 @@ $user = $this->getUser();
                                                   array('id' => $examen->getId())) ));
 
 
-                $form->add('submit', SubmitType::class, array('label' => 'Répondre'));
+                $form->add('submit', SubmitType::class, array('label' => 'Terminer'));
           // synchronise les données presente dans request avec le formulaire (rempli la variable $form avec le contenu de $request)
                 $form->handleRequest($request);
               if ($form->isSubmitted() && $form->isValid()) {
@@ -100,7 +100,7 @@ $user = $this->getUser();
           }
 
               return $this->render('examen/examen_correction.html.twig', array(
-                  'form' => $form->createView()
+                  'form' => $form->createView(),'reponses' => $examen->getReponses(),
         ));
         }
 }

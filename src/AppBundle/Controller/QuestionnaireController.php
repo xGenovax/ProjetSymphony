@@ -148,6 +148,7 @@ if ($request->query->getAlnum('filterTheme')) {
 
 	   foreach($questionnaire->getQuestions() as $question) {
         $reponse = new Reponse();
+        $reponse->setExamen($examen);
         $reponse->setQuestion($question);
         $examen->getReponses()->add($reponse);
 	   }
